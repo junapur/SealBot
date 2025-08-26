@@ -1,0 +1,67 @@
+[project]
+name = "sealbot"
+version = "0.1.0"
+description = "A Discord bot for seal enjoyers."
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [{ name = "June", email = "junapur@proton.me" }]
+maintainers = [{ name = "June", email = "junapur@proton.me" }]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/junapur/SealBot"
+Repository = "https://github.com/junapur/SealBot"
+Issues = "https://github.com/junapur/SealBot/issues"
+
+[project.scripts]
+sealbot = "sealbot:main"
+
+[build-system]
+requires = ["uv_build>=0.8.13,<0.9.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "nox>=2025.5.1",
+    "pyright>=1.1.404",
+    "ruff>=0.12.10",
+]
+
+[tool.pyright]
+pythonVersion = "3.13"
+typeCheckingMode = "strict"
+
+[tool.ruff]
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    "ASYNC", # flake8-async 
+    "S",     # flake8-bandit
+    "BLE",   # flake8-blind-except
+    "FBT",   # flake8-boolean-trap
+    "B",     # flake8-bugbear
+    "A",     # flake8-builtins
+    "C4",    # flake8-comprehensions
+    "EM",    # flake8-errmsg
+    "ISC",   # flake8-implicit-str-concat
+    "LOG",   # flake8-logging
+    "G",     # flake8-logging-format
+    "RSE",   # flake8-raise
+    "RET",   # flake8-return
+    "SIM",   # flake8-simplify
+    "PTH",   # flake8-use-pathlib
+
+    "I", # isort
+    "N", # pep8-naming
+    "E", # pycodestyle
+    "F", # pyflakes
+]
+
+ignore = [
+    # The following rules conflict with Ruff's formatter:
+    "E111",
+    "E114",
+    "E117",
+    "E501",
+]

@@ -1,0 +1,32 @@
+name: "CI"
+
+on: ["push", "pull_request"]
+
+jobs:
+  code-quality:
+    runs-on: "ubuntu-latest"
+
+    strategy:
+      matrix:
+        nox-session: ["lint", "type_check"]
+
+    steps:
+      - name: "Checkout code"
+        uses: "actions/checkout@v5"
+
+      - name: "Set up Python"
+        uses: "actions/setup-python@v5"
+        with:
+          python-version-file: ".python-version"
+
+      - name: "Setup uv"
+        uses: "astral-sh/setup-uv@v6"
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: "Install dependencies"
+        run: "uv sync --locked"
+
+      - name: "Test with Nox"
+        run: "uv run nox -s ${{ matrix.nox-session }}"
