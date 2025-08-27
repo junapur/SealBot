@@ -6,7 +6,12 @@ readme = "README.md"
 requires-python = ">=3.13"
 authors = [{ name = "June", email = "junapur@proton.me" }]
 maintainers = [{ name = "June", email = "junapur@proton.me" }]
-dependencies = []
+dependencies = [
+    "hikari-lightbulb>=3.1.3",
+    "hikari[speedups]>=2.3.5",
+    "pydantic>=2.11.7",
+    "pydantic-settings>=2.10.1",
+]
 
 [project.urls]
 Homepage = "https://github.com/junapur/SealBot"
@@ -14,7 +19,7 @@ Repository = "https://github.com/junapur/SealBot"
 Issues = "https://github.com/junapur/SealBot/issues"
 
 [project.scripts]
-sealbot = "sealbot:main"
+sealbot = "sealbot.main:main"
 
 [build-system]
 requires = ["uv_build>=0.8.13,<0.9.0"]
