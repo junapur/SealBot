@@ -30,6 +30,9 @@ def main() -> None:
 
     @bot.listen(hikari.StartingEvent)
     async def on_starting(_: hikari.StartingEvent) -> None:  # pyright: ignore[reportUnusedFunction]
+        registry = client.di.registry_for(lightbulb.di.Contexts.DEFAULT)
+        registry.register_value(Settings, settings)
+
         await client.load_extensions_from_package(sealbot.extensions)
         await client.start()
 
