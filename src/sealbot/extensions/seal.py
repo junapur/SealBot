@@ -21,4 +21,4 @@ class Seal(
         async with aiofiles.open(image, "rb") as f:
             image_bytes = await f.read()
 
-        await ctx.respond(hikari.Bytes(image_bytes, f"seal.{image.suffix}"))
+        await ctx.respond(hikari.Bytes(image_bytes, f"seal{image.suffix}"))
