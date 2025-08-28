@@ -5,7 +5,7 @@ A Discord bot for seal enjoyers.
 
 ## Self-Hosting Guide
 
-### 1. Download the images
+### 1. Download the Images
 You can download the images [here](https://drive.proton.me/urls/AX10JBT0ER#H0CnX5ZK1LDY).
 It's 4,280 images, totalling around 2.8 GB.
 
