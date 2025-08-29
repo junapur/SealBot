@@ -12,6 +12,7 @@ dependencies = [
     "hikari[speedups]>=2.3.5",
     "pydantic>=2.11.7",
     "pydantic-settings>=2.10.1",
+    "uvloop>=0.21.0; sys_platform != 'win32'",
 ]
 
 [project.urls]
