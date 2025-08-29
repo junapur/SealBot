@@ -1,5 +1,5 @@
 # 🦭 SealBot
-A Discord bot for seal enjoyers.
+A Discord bot for seal enjoyers. Add it to your server or account applications [here!](https://discord.com/oauth2/authorize?client_id=1410056445747265636)
 
 <br>
 
