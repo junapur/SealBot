@@ -26,7 +26,7 @@ class Ping(
                         spacing=hikari.SpacingType.SMALL,
                     ),
                     hikari.impl.TextDisplayComponentBuilder(
-                        content=f"**Running on:** {platform.system()} {platform.version()}"
+                        content=f"**Running on:** {platform.system()} {platform.release()}"
                     ),
                     hikari.impl.TextDisplayComponentBuilder(
                         content=f"**Using:** {platform.python_implementation()} {platform.python_version()}"
