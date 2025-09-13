@@ -5,8 +5,8 @@ This guide will walk you through the process of self-hosting your own instance o
 ### 1. Download Assets
 First, you need to download the image assets the bot uses.
 
-- [Download Here.](https://drive.proton.me/urls/AX10JBT0ER#H0CnX5ZK1LDY)
-- The download contains 4,280 images and is approximately **2.8 GB**.
+- [Download Here.](https://drive.proton.me/urls/G0X5S2B5QG#zaMGd0Fwbfw2)
+- The download contains 4,685 images and is approximately **5 GB**.
 
 
 ### 2. Clone the Repository
