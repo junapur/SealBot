@@ -12,7 +12,7 @@ loader = lightbulb.Loader()
 class Seal(
     lightbulb.SlashCommand,
     name="seal",
-    description="Get a random image of a seal",
+    description="Get a random image or gif of a seal",
 ):
     @lightbulb.invoke
     async def invoke(self, ctx: lightbulb.Context, images: list[Path]) -> None:
