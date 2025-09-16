@@ -3,6 +3,12 @@ import platform
 import hikari
 import lightbulb
 import psutil
+from hikari import SpacingType
+from hikari.impl import (
+    ContainerComponentBuilder,
+    SeparatorComponentBuilder,
+    TextDisplayComponentBuilder,
+)
 
 loader = lightbulb.Loader()
 
@@ -14,37 +20,51 @@ class Ping(
     description="Display statistics about the bot",
 ):
     @lightbulb.invoke
-    async def invoke(self, ctx: lightbulb.Context, bot: hikari.GatewayBot) -> None:
+    async def invoke(
+        self, ctx: lightbulb.Context, bot: hikari.GatewayBot, uptime: int
+    ) -> None:
         process = psutil.Process()
 
+        # TODO: rewrite this when lightbulb adds a components v2 builder.
         components = [
-            hikari.impl.ContainerComponentBuilder(
+            ContainerComponentBuilder(
                 components=[
-                    hikari.impl.TextDisplayComponentBuilder(content="## Bot Stats"),
-                    hikari.impl.SeparatorComponentBuilder(
+                    TextDisplayComponentBuilder(content="## SealBot"),
+                    TextDisplayComponentBuilder(
+                        content="A Discord bot for seal enjoyers."
+                    ),
+                    SeparatorComponentBuilder(
                         divider=True,
-                        spacing=hikari.SpacingType.SMALL,
+                        spacing=SpacingType.SMALL,
                     ),
-                    hikari.impl.TextDisplayComponentBuilder(
-                        content=f"**Running on:** {platform.system()} {platform.release()}"
+                    TextDisplayComponentBuilder(
+                        content=(
+                            f"**Running on**: {platform.system()} {platform.release()}, "
+                            f"{platform.python_implementation()} {platform.python_version()}"
+                        )
                     ),
-                    hikari.impl.TextDisplayComponentBuilder(
-                        content=f"**Using:** {platform.python_implementation()} {platform.python_version()}"
+                    TextDisplayComponentBuilder(content=f"**Uptime**: <t:{uptime}:R>"),
+                    TextDisplayComponentBuilder(
+                        content=f"**Latency**: {round(bot.heartbeat_latency * 1000)}ms"
                     ),
-                    hikari.impl.TextDisplayComponentBuilder(
-                        content=f"**Guilds:** {await bot.rest.fetch_my_guilds().count()}"
+                    TextDisplayComponentBuilder(
+                        content=f"**Memory**: {round(process.memory_info().rss / 1_000_000)}MB"
                     ),
-                    hikari.impl.TextDisplayComponentBuilder(
-                        content=f"**Ping:** {round(bot.heartbeat_latency * 1000)}ms"
+                    TextDisplayComponentBuilder(
+                        content=f"**CPU**: {round(process.cpu_percent())}%"
                     ),
-                    hikari.impl.TextDisplayComponentBuilder(
-                        content=f"**Memory:** {round(process.memory_info().rss / 1024 / 1024)}MB"
-                    ),
-                    hikari.impl.TextDisplayComponentBuilder(
-                        content=f"**CPU:** {round(process.cpu_percent())}%"
+                    TextDisplayComponentBuilder(
+                        content=f"**Guilds**: {await bot.rest.fetch_my_guilds().count()}"
                     ),
                 ]
             ),
+            hikari.impl.MessageActionRowBuilder(
+                components=[
+                    hikari.impl.LinkButtonBuilder(
+                        url="https://github.com/junapur/SealBot",
+                        label="Source Code",
+                    )
+                ]
+            ),
         ]
-
         await ctx.respond(components=components)

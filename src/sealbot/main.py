@@ -1,5 +1,6 @@
 import asyncio
 import sys
+import time
 from pathlib import Path
 
 import hikari
@@ -30,6 +31,9 @@ def main() -> None:
     async def on_starting(_: hikari.StartingEvent) -> None:  # pyright: ignore[reportUnusedFunction]
         registry = client.di.registry_for(lightbulb.di.Contexts.DEFAULT)
         registry.register_value(list[Path], images)
+
+        uptime = int(time.time())
+        registry.register_value(int, uptime)
 
         await client.load_extensions_from_package(sealbot.extensions)
         await client.start()
