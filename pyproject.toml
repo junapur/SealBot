@@ -3,16 +3,17 @@ name = "sealbot"
 version = "0.1.0"
 description = "A Discord bot for seal enjoyers."
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 authors = [{ name = "June", email = "junapur@proton.me" }]
 maintainers = [{ name = "June", email = "junapur@proton.me" }]
 dependencies = [
     "aiofiles>=24.1.0",
+    "aiohttp>=3.13.0",
     "hikari-lightbulb>=3.2.1",
-    "hikari[speedups]>=2.3.5",
-    "psutil>=7.0.0",
-    "pydantic>=2.11.7",
-    "pydantic-settings>=2.10.1",
+    "hikari>=2.4.1",
+    "psutil>=7.1.0",
+    "pydantic>=2.12.0",
+    "pydantic-settings>=2.11.0",
     "uvloop>=0.21.0; sys_platform != 'win32'",
 ]
 
@@ -25,14 +26,14 @@ Issues = "https://github.com/junapur/SealBot/issues"
 sealbot = "sealbot.main:main"
 
 [build-system]
-requires = ["uv_build>=0.8.22,<0.9.0"]
+requires = ["uv_build>=0.9.0,<0.10.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
     "nox>=2025.5.1",
     "pyright[nodejs]>=1.1.406",
-    "ruff>=0.12.10",
+    "ruff>=0.14.0",
 ]
 
 [tool.pyright]
