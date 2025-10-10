@@ -1,4 +1,4 @@
-import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import hikari
@@ -24,8 +24,8 @@ def main() -> None:
         registry = client.di.registry_for(lightbulb.di.Contexts.DEFAULT)
         registry.register_value(list[Path], images)
 
-        uptime = int(time.time())
-        registry.register_value(int, uptime)
+        uptime = datetime.now(timezone.utc)
+        registry.register_value(datetime, uptime)
 
         await client.load_extensions_from_package(sealbot.extensions)
         await client.start()

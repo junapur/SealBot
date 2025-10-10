@@ -1,4 +1,5 @@
 import platform
+from datetime import datetime
 
 import hikari
 import lightbulb
@@ -21,11 +22,11 @@ class Ping(
 ):
     @lightbulb.invoke
     async def invoke(
-        self, ctx: lightbulb.Context, bot: hikari.GatewayBot, uptime: int
+        self, ctx: lightbulb.Context, bot: hikari.GatewayBot, uptime: datetime
     ) -> None:
         process = psutil.Process()
 
-        # TODO: rewrite this when lightbulb adds a components v2 builder.
+        # TODO: rewrite this when lightbulb adds a components v2 builder
         components = [
             ContainerComponentBuilder(
                 components=[
@@ -43,7 +44,9 @@ class Ping(
                             f"{platform.python_implementation()} {platform.python_version()}"
                         )
                     ),
-                    TextDisplayComponentBuilder(content=f"**Uptime**: <t:{uptime}:R>"),
+                    TextDisplayComponentBuilder(
+                        content=f"**Uptime**: <t:{int(uptime.timestamp())}:R>"
+                    ),
                     TextDisplayComponentBuilder(
                         content=f"**Latency**: {round(bot.heartbeat_latency * 1000)}ms"
                     ),
