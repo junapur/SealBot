@@ -1,4 +1,3 @@
-import asyncio
 import sys
 import time
 from pathlib import Path
@@ -12,11 +11,6 @@ from sealbot.settings import Settings
 
 
 def main() -> None:
-    if sys.platform != "win32":
-        import uvloop
-
-        asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
-
     settings = load_settings()
     images = load_images(settings.bot.assets_dir)
 
