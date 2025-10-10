@@ -1,13 +1,11 @@
-import sys
 import time
 from pathlib import Path
 
 import hikari
 import lightbulb
-import pydantic
 
 import sealbot.extensions
-from sealbot.settings import Settings
+from sealbot.settings import load_images, load_settings
 
 
 def main() -> None:
@@ -33,34 +31,3 @@ def main() -> None:
         await client.start()
 
     bot.run()
-
-
-def load_settings() -> Settings:
-    try:
-        return Settings()
-    except pydantic.ValidationError as e:
-        print("Failed to validate settings:", file=sys.stderr)
-
-        for err in e.errors():
-            loc = ".".join(str(loc) for loc in err["loc"])
-            msg = err["msg"]
-            typ = err["type"]
-            print(f"  • {loc}: {msg} ({typ})", file=sys.stderr)
-
-        sys.exit(1)
-
-
-def load_images(assets_dir: Path) -> list[Path]:
-    image_exts = {".jpg", ".jpeg", ".png", ".avif", ".webp", ".gif"}
-
-    images = [
-        item
-        for item in assets_dir.iterdir()
-        if item.is_file() and item.suffix.lower() in image_exts
-    ]
-
-    if not images:
-        print(f"No image files found in '{assets_dir}'", file=sys.stderr)
-        sys.exit(1)
-
-    return images
